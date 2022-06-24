@@ -10,7 +10,7 @@ type CallButton struct {
 
 func NewCallButton(id int, status string, floor int, direction string) *CallButton {
 
-	CallButton := &CallButton{id: id, status: "idle", floor: floor, direction: "down"}
+	callButton := &CallButton{id: id, status: status, floor: floor, direction: direction}
 
-	return CallButton
+	return callButton
 }

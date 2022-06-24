@@ -1,49 +1,101 @@
 package main
 
+import "sort"
+
 type Elevator struct {
 	id                    int
 	status                string
-	amountOfFloor         int
+	amountOfFloors        int
 	currentFloor          int
-	floorRequestList      []int
+	floorRequestsList     []int
 	direction             string
 	overweight            bool
 	completedRequestsList []int
+	screenDisplay         int
+	door                  Door
 }
 
 func NewElevator(id int, status string, amountOfFloor int, currentFloor int) *Elevator {
 
-	elevator := &Elevator{id: id, status: "idle", amountOfFloor: amountOfFloor, currentFloor: currentFloor}
+	door := Door{id: id, status: "closed", obstruction: false}
+	elevator := &Elevator{id: id, status: "idle", amountOfFloors: amountOfFloor, currentFloor: currentFloor, door: door}
 
 	return elevator
+
 }
 
 func (e *Elevator) move() {
 
-if (this.floorRequestsList.Count != 0) {
-	var destination = this.floorRequestsList[0];
-	this.status = "moving";
-	if (this.currentFloor < destination) {
-		this.direction = "up";
-		this.sortFloorList();
-		if (this.currentFloor < destination) {
-			this.currentFloor++;
-			this.screenDisplay = this.currentFloor;
+	for true {
+		if len(e.floorRequestsList) != 0 {
+			var destination = e.floorRequestsList[0]
+			e.status = "moving"
+			if e.currentFloor < destination {
+				e.direction = "up"
+				e.sortFloorList()
+				if e.currentFloor < destination {
+					e.currentFloor++
+					e.screenDisplay = e.currentFloor
+				}
+				break
+			}
+			if e.currentFloor > destination {
+				e.direction = "down"
+				e.sortFloorList()
+				if e.currentFloor > destination {
+					e.currentFloor--
+					e.screenDisplay = e.currentFloor
+				}
+				break
+			}
+			e.status = "stopped"
+			e.operateDoors()
+			e.completedRequestsList = append(e.completedRequestsList, e.floorRequestsList[0])
+			e.floorRequestsList = append([]int{1}, e.floorRequestsList...)
 		}
+		e.status = "idle"
 	}
-	else if (this.currentFloor > destination) {
-		this.direction = "down";
-		this.sortFloorList();
-		while (this.currentFloor > destination) {
-			this.currentFloor--;
-			this.screenDisplay = this.currentFloor;
-		}
-	}
-	this.status = "stopped";
-	this.operateDoors();
-	this.completedRequestsList.Add(this.floorRequestsList[0]);
-	this.floorRequestsList.RemoveAt(0);
 }
-this.status = "idle";
 
+func (e *Elevator) sortFloorList() {
+
+	if e.direction == "up" {
+		sort.Ints(e.floorRequestsList)
+	}
+	if e.direction == "down" {
+		sort.Sort(sort.Reverse(sort.IntSlice(e.floorRequestsList)))
+	}
+}
+
+func (e *Elevator) operateDoors() {
+
+	e.door.status = "opened"
+	//Console.WriteLine("wait 5 seconds");
+	if e.overweight == false {
+		e.door.status = "closing"
+		if e.door.obstruction == false {
+			e.door.status = "closed"
+		}
+	}
+	if e.door.obstruction == true {
+		e.operateDoors()
+	}
+	if e.overweight == true {
+		//Console.WriteLine("Activate overweight alarm")
+
+		e.operateDoors()
+	}
+}
+
+func (e *Elevator) addNewRequest(requestedFloor int) {
+
+	if len(e.floorRequestsList) == 0 {
+		e.floorRequestsList = append(e.floorRequestsList, requestedFloor)
+	}
+	if e.currentFloor < requestedFloor {
+		e.direction = "up"
+	}
+	if e.currentFloor > requestedFloor {
+		e.direction = "down"
+	}
 }
