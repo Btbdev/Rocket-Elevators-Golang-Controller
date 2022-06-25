@@ -64,83 +64,84 @@ func NewColumn(id int, status string, amountOfElevators int, servedFloors []int,
 // 	return elevator
 // }
 
-// func (c *Column) findElevator(requestedFloor int, requestedDirection string) {
+func (c *Column) findElevator(requestedFloor int, requestedDirection string) {
 
-// 			var bestElevatorInformations = nil
-//             //Elevator bestElevator = null;
+			var bestElevatorInformations = nil
+            //Elevator bestElevator = null;
 
-//             if (requestedFloor == 1) {
+            if (requestedFloor == 1) {
 
-//                 for i, s := range (Elevator elevator in e.elevatorsList) {
+                //for i, s := range Elevator c.elevatorsList {
 
-//                     //The elevator is at the lobby and already has some requests. It is about to leave but has not yet departed.
-//                     if (1 == elevator.currentFloor && elevator.status == "stopped")
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(1, elevator, bestElevatorInformations, requestedFloor);
+                    //The elevator is at the lobby and already has some requests. It is about to leave but has not yet departed.
+                    if 1 == elevator.currentFloor && elevator.status == "stopped" {
 
-//                     }
-//                     //The elevator is at the lobby and has no requests
-//                     else if (1 == elevator.currentFloor && elevator.status == "idle")
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(2, elevator, bestElevatorInformations, requestedFloor);
+                        bestElevatorInformations = checkIfElevatorIsBetter(1, elevator, bestElevatorInformations, requestedFloor);
 
-//                     }
-//                     //The elevator is lower than me and is coming up. It means that I'm requesting an elevator to go to a basement, and the elevator is on it's way to me.
-//                     else if (1 > elevator.currentFloor && elevator.direction == "up")
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(3, elevator, bestElevatorInformations, requestedFloor);
+                    }
+                    //The elevator is at the lobby and has no requests
+                    if 1 == elevator.currentFloor && elevator.status == "idle" {
+                        
+						bestElevatorInformations = checkIfElevatorIsBetter(2, elevator, bestElevatorInformations, requestedFloor);
 
-//                     }
-//                     //The elevator is above me and is coming down. It means that I'm requesting an elevator to go to a floor, and the elevator is on it's way to me
-//                     else if (1 < elevator.currentFloor && elevator.direction == "down")
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(3, elevator, bestElevatorInformations, requestedFloor);
+                    }
+                    //The elevator is lower than me and is coming up. It means that I'm requesting an elevator to go to a basement, and the elevator is on it's way to me.
+                    if 1 > elevator.currentFloor && elevator.direction == "up" {
+                        
+						bestElevatorInformations = checkIfElevatorIsBetter(3, elevator, bestElevatorInformations, requestedFloor);
 
-//                     }
-//                     //The elevator is not at the first floor, but doesn't have any request
-//                     else if (elevator.status == "idle")
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(4, elevator, bestElevatorInformations, requestedFloor);
+                    }
+                    //The elevator is above me and is coming down. It means that I'm requesting an elevator to go to a floor, and the elevator is on it's way to me
+                    if 1 < elevator.currentFloor && elevator.direction == "down" {
+                        
+						bestElevatorInformations = checkIfElevatorIsBetter(3, elevator, bestElevatorInformations, requestedFloor);
 
-//                     }
-//                     //The elevator is not available, but still could take the call if nothing better is found
-//                     else
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(5, elevator, bestElevatorInformations, requestedFloor);
-//                     }
-//                 };
-//             }
-//             else {
+                    }
+                    //The elevator is not at the first floor, but doesn't have any request
+                    if elevator.status == "idle" {
+                        
+						bestElevatorInformations = checkIfElevatorIsBetter(4, elevator, bestElevatorInformations, requestedFloor);
 
-//                 foreach (Elevator elevator in this.elevatorsList)
-//                 {
-//                     //The elevator is at the same level as me, and is about to depart to the first floor
-//                     if (requestedFloor == elevator.currentFloor && elevator.status == "stopped" && _requestedDirection == elevator.direction)
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(1, elevator, bestElevatorInformations, requestedFloor);
-//                     }
-//                     //The elevator is lower than me and is going up. I'm on a basement, and the elevator can pick me up on it's way
-//                     else if (requestedFloor > elevator.currentFloor && elevator.direction == "up" && _requestedDirection == "up")
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(2, elevator, bestElevatorInformations, requestedFloor);
-//                     }
-//                     //The elevator is higher than me and is going down. I'm on a floor, and the elevator can pick me up on it's way
-//                     else if (requestedFloor < elevator.currentFloor && elevator.direction == "down" && _requestedDirection == "down")
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(2, elevator, bestElevatorInformations, requestedFloor);
-//                     }
-//                     //The elevator is idle and has no requests
-//                     else if (elevator.status == "idle")
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(4, elevator, bestElevatorInformations, requestedFloor);
-//                     }
-//                     //The elevator is not available, but still could take the call if nothing better is found
-//                     else
-//                     {
-//                         bestElevatorInformations = checkIfElevatorIsBetter(5, elevator, bestElevatorInformations, requestedFloor);
-//                     }
-//                 };
-//             }
-//                 bestElevator = bestElevatorInformations.bestElevator;
-//                 return bestElevator;
-// }
+                    }
+                    //The elevator is not available, but still could take the call if nothing better is found
+                    
+					else 
+                        
+						bestElevatorInformations = checkIfElevatorIsBetter(5, elevator, bestElevatorInformations, requestedFloor);
+                    
+                };
+            }
+            else {
+
+                foreach (Elevator elevator in this.elevatorsList)
+                {
+                    //The elevator is at the same level as me, and is about to depart to the first floor
+                    if (requestedFloor == elevator.currentFloor && elevator.status == "stopped" && _requestedDirection == elevator.direction)
+                    {
+                        bestElevatorInformations = checkIfElevatorIsBetter(1, elevator, bestElevatorInformations, requestedFloor);
+                    }
+                    //The elevator is lower than me and is going up. I'm on a basement, and the elevator can pick me up on it's way
+                    else if (requestedFloor > elevator.currentFloor && elevator.direction == "up" && _requestedDirection == "up")
+                    {
+                        bestElevatorInformations = checkIfElevatorIsBetter(2, elevator, bestElevatorInformations, requestedFloor);
+                    }
+                    //The elevator is higher than me and is going down. I'm on a floor, and the elevator can pick me up on it's way
+                    else if (requestedFloor < elevator.currentFloor && elevator.direction == "down" && _requestedDirection == "down")
+                    {
+                        bestElevatorInformations = checkIfElevatorIsBetter(2, elevator, bestElevatorInformations, requestedFloor);
+                    }
+                    //The elevator is idle and has no requests
+                    else if (elevator.status == "idle")
+                    {
+                        bestElevatorInformations = checkIfElevatorIsBetter(4, elevator, bestElevatorInformations, requestedFloor);
+                    }
+                    //The elevator is not available, but still could take the call if nothing better is found
+                    else
+                    {
+                        bestElevatorInformations = checkIfElevatorIsBetter(5, elevator, bestElevatorInformations, requestedFloor);
+                    }
+                };
+            }
+                bestElevator = bestElevatorInformations.bestElevator;
+                return bestElevator;
+}
