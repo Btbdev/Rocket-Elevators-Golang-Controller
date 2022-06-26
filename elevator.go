@@ -19,7 +19,6 @@ type Elevator struct {
 //Function to create the elevator
 func NewElevator(id int, status string, amountOfFloor int, currentFloor int) Elevator {
 
-	//floorRequestList := floorRequestList{[]int}
 	door := Door{id: id, status: "closed", obstruction: false}
 	elevator := Elevator{id: id, status: "idle", amountOfFloors: amountOfFloor, currentFloor: currentFloor, door: door, floorRequestsList: []int{}, completedRequestsList: []int{}}
 

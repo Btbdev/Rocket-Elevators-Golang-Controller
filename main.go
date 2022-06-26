@@ -21,6 +21,7 @@ func main() {
 	Elevator.sortFloorList()
 	Elevator.operateDoors()
 	Elevator.addNewRequest(3)
+	//Column := NewColumn(1, "idle", 10, 20, true)
 	// scenarioNumber, err := strconv.Atoi(os.Args[1])
 	// if err == nil {
 	// 	runScenario(scenarioNumber)

@@ -70,12 +70,12 @@ func (c *Column) createElevator(amountOfFloors int, amountOfElevators int) {
 //Simulate when a user press a button on a floor to go back to the first floor
 func (c *Column) requestElevator(userPosition int, direction string) Elevator {
 
-	c.elevator := findElevator(userPosition, direction)
+	elevator := c.findElevator(userPosition, direction)
 	c.elevator.addNewRequest(userPosition)
 	c.elevator.move()
 	c.elevator.addNewRequest(1)
 	c.elevator.move()
-	return c.elevator
+	return elevator
 }
 
 //Function to find an elevator upon the situation of the user
@@ -149,9 +149,7 @@ func (c *Column) findElevator(requestedFloor int, requestedDirection string) Ele
 			}
 		}
 	}
-	var elevator = bestElevatorInformations.bestElevator
-	return elevator
-
+	return bestElevatorInformations.bestElevator
 }
 
 //Function to evaluate the best option of the available elevators upon ther user's request
@@ -171,5 +169,4 @@ func (c *Column) checkIfElevatorIsBetter(scoreToCheck int, newElevator Elevator,
 		}
 	}
 	return bestElevatorInformations
-
 }

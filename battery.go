@@ -32,6 +32,15 @@ func NewBattery(id, amountOfColumns, amountOfFloors, amountOfBasements, amountOf
 
 func (b *Battery) createBasementColumn(amountOfBasements int, amountOfElevatorPerColumn int) {
 
+	// 	//servedFloorList = NewServedFloorList[]int
+	// 	var floor = -1
+	// 	for i := 0; i < amountOfBasements; i++ {
+	// 		b.servedFloorList = append(b.servedFloorList, floor)
+	// 		floor--
+	// 	}
+	// 	c.column = NewColumn(ID, "online", amountOfBasements, amountOfElevatorPerColumn, b.servedFloorList, true)
+	// 	b.columnsList = append(b.columnsList, column)
+	// 	ID++
 }
 
 func (b *Battery) createColumns(amountOfColumns int, amountOfFloors int, amountOfBasements int, amountOfElevatorPerColumn int) {

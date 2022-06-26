@@ -4,6 +4,8 @@
 
 This version is currently under construction. We are working hard to make all the components work for you !
 
+The column section has not been tested yet, and the battery section is not finished.
+
 #################################################################################################################
 
 
