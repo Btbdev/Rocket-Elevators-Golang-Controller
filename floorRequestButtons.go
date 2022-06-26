@@ -8,6 +8,7 @@ type FloorRequestButton struct {
 	direction string
 }
 
+//Function to create the floor request button
 func NewFloorRequestButton(id int, status string, floor int, direction string) *FloorRequestButton {
 
 	floorRequestButton := &FloorRequestButton{id: id, status: "idle", floor: floor, direction: "up"}

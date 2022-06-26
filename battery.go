@@ -1,5 +1,6 @@
 package main
 
+//Attributes of the battery
 type Battery struct {
 	id                        int
 	status                    string
@@ -11,7 +12,7 @@ type Battery struct {
 	columnsList               []int
 	floorRequestButton        FloorRequestButton
 	floorRequestButtonList    []int
-	servedFloor               Column
+	servedFloor               int
 	elevator                  Elevator
 	amountOfElevators         int
 	servedFloorList           []int
@@ -20,38 +21,44 @@ type Battery struct {
 func NewBattery(id, amountOfColumns, amountOfFloors, amountOfBasements, amountOfElevatorPerColumn int) *Battery {
 
 	battery := &Battery{id: id, amountOfColumns: amountOfColumns, amountOfFloors: amountOfFloors, amountOfElevatorPerColumn: amountOfElevatorPerColumn}
+	battery.createBasementFloorRequestButtons(battery.amountOfBasements)
+	battery.createBasementColumn(battery.amountOfBasements, battery.amountOfElevatorPerColumn)
+	battery.createFloorRequestButtons(battery.amountOfFloors)
+	battery.createColumns(battery.amountOfColumns, battery.amountOfFloors, battery.amountOfBasements, battery.amountOfElevatorPerColumn)
 
 	return battery
 
-	// 	this.ID = _ID;
-	// 	this.status = "online";
-	// 	this.columnsList = new List<Column>();
-	// 	this.floorRequestButtonList = new List<FloorRequestButton>();
+}
 
-	// 	if (_amountOfBasements > 0) {
-	// 		this.createBasementFloorRequestButtons(_amountOfBasements);
-	// 		this.createBasementColumn(_amountOfBasements, _amountOfElevatorPerColumn);
-	// 		_amountOfColumns--;
-	// 	}
-
-	// 	this.createFloorRequestButtons(_amountOfFloors);
-	// 	this.createColumns(_amountOfColumns, _amountOfFloors, _amountOfBasements, _amountOfElevatorPerColumn);
+func (b *Battery) createBasementColumn(amountOfBasements int, amountOfElevatorPerColumn int) {
 
 }
 
-func (b *Battery) findBestColumn(_requestedFloor int) *Column {
+func (b *Battery) createColumns(amountOfColumns int, amountOfFloors int, amountOfBasements int, amountOfElevatorPerColumn int) {
 
-	bestColumn := b.columnsList[0]
-
-	for _, column := range b.columnsList {
-		for _, x := range column.servedFloor {
-			if x == _requestedFloor {
-				return &column
-			}
-		}
-	}
-	return &bestColumn
 }
+
+func (b *Battery) createFloorRequestButtons(amountOfFloors int) {
+
+}
+
+func (b *Battery) createBasementFloorRequestButtons(amountOfFloors int) {
+
+}
+
+// func (b *Battery) findBestColumn(_requestedFloor int) *Column {
+
+// 	bestColumn := b.columnsList[0]
+
+// 	for _, column := range b.columnsList {
+// 		for _, x := range column.servedFloor {
+// 			if x == _requestedFloor {
+// 				return &column
+// 			}
+// 		}
+// 	}
+// 	return &bestColumn
+// }
 
 // //Simulate when a user press a button at the lobby
 // func (b *Battery) assignElevator(_requestedFloor int, _direction string) (*Column, *Elevator) {

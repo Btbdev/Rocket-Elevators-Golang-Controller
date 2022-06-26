@@ -2,6 +2,7 @@ package main
 
 import "sort"
 
+//Attributes of the elevator
 type Elevator struct {
 	id                    int
 	status                string
@@ -15,6 +16,7 @@ type Elevator struct {
 	door                  Door
 }
 
+//Function to create the elevator
 func NewElevator(id int, status string, amountOfFloor int, currentFloor int) Elevator {
 
 	//floorRequestList := floorRequestList{[]int}
@@ -25,6 +27,7 @@ func NewElevator(id int, status string, amountOfFloor int, currentFloor int) Ele
 
 }
 
+//Function to move the elevator upon the request made by the user
 func (e *Elevator) move() {
 
 	for true {
@@ -58,6 +61,7 @@ func (e *Elevator) move() {
 	}
 }
 
+//Function to sort the floor list created
 func (e *Elevator) sortFloorList() {
 
 	if e.direction == "up" {
@@ -68,6 +72,7 @@ func (e *Elevator) sortFloorList() {
 	}
 }
 
+//Function to operate the elevator's doors upon its situation
 func (e *Elevator) operateDoors() {
 
 	e.door.status = "opened"
@@ -88,6 +93,7 @@ func (e *Elevator) operateDoors() {
 	}
 }
 
+//Function to add the new requested floor on the list
 func (e *Elevator) addNewRequest(requestedFloor int) {
 
 	if len(e.floorRequestsList) == 0 {

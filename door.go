@@ -7,6 +7,7 @@ type Door struct {
 	obstruction bool
 }
 
+//Function to create the door
 func NewDoor(id int, status string, obsturction bool) *Door {
 
 	door := &Door{id: id, status: "closed", obstruction: false}
